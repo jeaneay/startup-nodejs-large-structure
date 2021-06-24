@@ -1,0 +1,25 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    // Show eslint warnings and errors in typescript files
+    "eslint.validate": [
+      "javascript",
+      "typescript",
+    ],
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },    
+    "[typescript]": {
+        "editor.formatOnSave": false
+    },
+    "search.exclude": {
+      "**/coverage": true,
+      "**/dist": true,
+      "**/node_modules": true
+    },
+    "eslint.alwaysShowStatus": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.suggest.paths": false,
+}
