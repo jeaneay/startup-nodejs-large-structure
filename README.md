@@ -1,5 +1,31 @@
 # omedema-backend
-Platform of services
+Startup NodeJs Large Structure
+
+
+
+### Active postgresql database with docker:
+
+You need to install docker in your computer after that you can build and run your image with the file Dockerfile.
+
+Buid your image :
+Replace name_of_image by your name do you want for your image
+(the dot at the end of command it's important !)
+```
+docker build -t name_of_image .
+```
+Run your image :
+```
+docker run -d -p 5432:5432 name_of_image
+```
+Active your DB with pgAdmin :
+if you want to active your docker database with pgAdmin when you need to connect server you have to indicate for :
+```
+Host name/address : 127.0.0.1
+Port : 5432
+Maintenance database : postgres
+Username: omedema
+Password: omedema
+```
 
 ## Branch
 
@@ -77,28 +103,4 @@ Exemple:
 feat(controller): add post's controller
 fix(controller): use the correct HTTP code
 refactor(repository): remove deprecated method
-```
-
-### Active postgresql database with docker:
-
-You need to install docker in your computer after that you can build and run your image with the file Dockerfile.
-
-Buid your image :
-Replace name_of_image by your name do you want for your image
-(the dot at the end of command it's important !)
-```
-docker build -t name_of_image .
-```
-Run your image :
-```
-docker run -d -p 5432:5432 name_of_image
-```
-Active your DB with pgAdmin :
-if you want to active your docker database with pgAdmin when you need to connect server you have to indicate for :
-```
-Host name/address : 127.0.0.1
-Port : 5432
-Maintenance database : postgres
-Username: omedema
-Password: omedema
 ```
