@@ -23,11 +23,11 @@ const ENV: string = process.env.NODE_ENV || 'development';
 const test: ConfigServer = {
   ip_address: '0.0.0.0',
   postgresql: {
-    db_name: process.env.TEST_DB_NAME || 'omedemaTestDB',
+    db_name: process.env.TEST_DB_NAME || 'testDB',
     host: process.env.TEST_DB_HOST || 'localhost',
-    pass: process.env.TEST_DB_PASS || 'omedema',
+    pass: process.env.TEST_DB_PASS || 'testing',
     port: parseInt(process.env.TEST_DB_PORT || '5432', 10),
-    user: process.env.TEST_DB_USER || 'omedema',
+    user: process.env.TEST_DB_USER || 'testing',
   },
   port: parseInt(process.env.TEST_APP_PORT || '8091', 10),
 };
@@ -35,25 +35,13 @@ const test: ConfigServer = {
 const local: ConfigServer = {
   ip_address: '0.0.0.0',
   postgresql: {
-    db_name: process.env.LOCAL_DB_NAME || 'omedemaLocalDB',
+    db_name: process.env.LOCAL_DB_NAME || 'localDB',
     host: process.env.LOCAL_DB_HOST || 'localhost',
-    pass: process.env.LOCAL_DB_PASS || 'omedema',
+    pass: process.env.LOCAL_DB_PASS || 'testing',
     port: parseInt(process.env.LOCAL_DB_PORT || '5432', 10),
-    user: process.env.LOCAL_DB_USER || 'omedema',
+    user: process.env.LOCAL_DB_USER || 'testing',
   },
   port: parseInt(process.env.LOCAL_APP_PORT || '8090', 10),
-};
-
-const develop: ConfigServer = {
-  ip_address: '0.0.0.0',
-  postgresql: {
-    db_name: process.env.DEVELOP_DB_NAME || '',
-    host: process.env.DEVELOP_DB_HOST,
-    pass: process.env.DEVELOP_DB_PASS || '',
-    port: parseInt(process.env.DEVELOP_DB_PORT || '5432', 10),
-    user: process.env.DEVELOP_DB_USER || '',
-  },
-  port: parseInt(process.env.DEVELOP_APP_PORT || '8080', 10),
 };
 
 const statging: ConfigServer = {
@@ -80,7 +68,7 @@ const production: ConfigServer = {
   port: parseInt(process.env.PORT || '8080', 10),
 };
 
-const settings: any = { test, local, develop, statging, production };
+const settings: any = { test, local, statging, production };
 export const config: ConfigServer = settings.hasOwnProperty(ENV)
   ? settings[ENV]
   : settings.local;
