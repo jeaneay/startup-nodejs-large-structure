@@ -55,6 +55,7 @@ const signIn = async (
       if (!isPasswordValid) {
         throw new Error(appMessage.user.ERROR_MDP);
       }
+  
       //DELETE 6h after the test
       //Create token
       const { accessToken, xsrfToken } = await tokenUtil.createToken(
@@ -65,6 +66,7 @@ const signIn = async (
         user,
         appEnv.JWT_REFRESH_EXPIRESIN,
       );
+
       //Add the refresh token in BDD
       const token = await new db.Token();
       await token.createTokenByUser(user.id, refreshToken);

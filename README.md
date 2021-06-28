@@ -1,5 +1,47 @@
-### About
-Starting a large nodejs structure with NodeJS, Sequelize, typescript, Express, winston...
+## About
+I wanted to create this project for when I wanted to start a nodejs project from scratch.
+
+You will find a basic configuration with :
+- NodeJS, 
+- Sequelize (ORM Postgres, MySQL, MariaDB, SQLite...), 
+- typescript, 
+- Express, 
+- Docker
+- Winston
+- Eslint
+- Prettier
+- CI/CD (CircleCi, Github action and deployment to AWS)
+
+You will also find a sample api for signup, signin (with cookie and access token), logout and a user api.
+
+## Table of contents
+
+* [Structure](#structure)
+* [Installing dependencies](#installing-dependencies)
+* [Docker and postgresql](#Docker-and-postgresql)
+* [Sequelize](#sequelize)
+  * [Development](#development)
+  * [Production](#production)
+* [Running the application](#Running-the-application)
+* [CI/CD](#CI-CD)
+  * [Circle CI](#circle-ci)
+  * [Github Action and AWS](#github-action-aws)
+* [Testing](#CI-CD)
+* [Bonus](#bonus)
+
+## Structure
+
+For large projects I use a structure in the form of components/modules which is easier to maintain than by Group your files by technical role.
+
+[The example with the users module](https://github.com/jeaneay/startup-nodejs-large-structure/tree/master/src/modules/users)
+
+In a module you will find :
+- The model(s)
+- The controllers
+- Routes
+- Tests (Not required)
+
+And all other information about this module
 
 ## Installing dependencies
 
@@ -9,7 +51,73 @@ To install the dependencies run
 npm install
 ```
 
-## Running the application locally with local env vars
+### Docker and postgresql
+
+I use docker locally to create the database in postgresql with the file Dockerfile
+You need to install docker in your computer after that you can build and run your image with the file Dockerfile.
+
+Buid your image :
+
+Replace name_of_image by your name do you want for your image
+(the dot at the end of command it's important !)
+```
+docker build -t name_of_image .
+```
+Run your image :
+```
+docker run -d -p 5432:5432 name_of_image
+```
+Active your DB with pgAdmin :
+if you want to active your docker database with pgAdmin when you need to connect server you have to indicate for :
+```
+Host name/address : 127.0.0.1
+Port : 5432
+Maintenance database : postgres
+Username: testing
+Password: testing
+```
+
+## Sequelize
+
+To create the connection between the Postgresql database and my nodejs app I use the Sequelize ORM which also works with MySQL, MariaDB, SQLite databases...
+[The documentation](https://sequelize.org/)
+
+The use of sequelize in development is not the same as in production because in production you have to use the [migration](https://sequelize.org/master/manual/migrations.html) for performance reasons.
+
+### Development
+
+For this project I use the synchronization for all models, to do this I created 2 files :
+
+A file [load-model](https://github.com/jeaneay/startup-nodejs-large-structure/blob/master/src/config/database.ts) which allows to sync and create associations between models in the database.
+
+And the file [create-model](https://github.com/jeaneay/startup-nodejs-large-structure/blob/master/src/config/database.ts) which is particular because for the synchronization of the models. 
+
+Most of the time you will find the load-model file in the same folder where all models are stored but with a component/module structure the models are separated.
+
+So I had to create a file that retrieves all the models automatically in each component/module to do this in each component/module you must have a folder named models where you store your models and it will create the model from the example file name:
+
+```
+forum-category.js -> ForumCategory 
+```
+
+The model will be named ForumCategory in the database if you want to change the name of the model in the database you can make the change in the file create-model
+
+
+### Production
+
+In production you must use the [migration](https://sequelize.org/master/manual/migrations.html) for performance reasons.
+
+Please read the [documentation](https://sequelize.org/master/manual/migrations.html) to understand how it works.
+
+To create tables or add data from a migration I added 3 commands in the package.json file.
+```
+"migrations:all": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+"migrations:table": "npx sequelize-cli db:migrate",
+"migrations:seeds": "npx sequelize-cli db:seed:all",
+```
+
+
+## Running the application
 
 Before to run app edit create the file `.env` with this configuration
 
@@ -62,41 +170,47 @@ npm run watch
 
 Note that if you change the value of the `.env` file, you need to run `npm run watch` again so that the new env var changes are picked up.
 
-### Active postgresql database with docker:
+## CI/CD
 
-You need to install docker in your computer after that you can build and run your image with the file Dockerfile.
+For continuous integration and continuous deployment I mainly use Circle CI and github action for deployment to AWS.
 
-Buid your image :
-Replace name_of_image by your name do you want for your image
-(the dot at the end of command it's important !)
+### Circle CI
+
+For the continuous integration I use Circle CI you will find in the project an example of configuration in the .circleci folder and the config.yml file which allows to launch the tests automatically.
+
+### Github Action and AWS
+
+For the continuous deployment I use github actions with an example of configuration and deployment on an AWS server.
+In the configuration file github/workflows/stating.yml you have to change 4 commands:
+
+
 ```
-docker build -t name_of_image .
+branches: [ name_of_your_branch ]
+VERSION_LABEL: name_of_your_label-${{ github.run_id }}
+application_name: name_of_your_application_aws
+environment_name: name_of_your_environment_aws
 ```
-Run your image :
+Don't forget to add your environment variables in github for aws with the following names : 
 ```
-docker run -d -p 5432:5432 name_of_image
-```
-Active your DB with pgAdmin :
-if you want to active your docker database with pgAdmin when you need to connect server you have to indicate for :
-```
-Host name/address : 127.0.0.1
-Port : 5432
-Maintenance database : postgres
-Username: testing
-Password: testing
+AWS_ACCESS_KEY_ID: name of your access key id aws
+AWS_SECRET_ACCESS_KEY : name of your secret access key aws
 ```
 
-## Branch
+## Testing
 
-### The branches:
+For the test part I use chai and mocha you will find an example in the /tests folder with unit tests.
 
-We have 2 main branch :
+```
+"test": "tsc && cross-env NODE_ENV=test node_modules/.bin/mocha tests/**/**.test.js --timeout 60000",
+"test:coverage": "tsc && cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha tests/**/**.test.js --timeout 60000"
+```
 
-- master : branch for production Server
-- staging : branch for development Server
+The test command allows you to run tests without coverage and the test:coverage command allows you to run tests with Istanbul Code Coverage.
 
-Never merge or pull request on master from another branch than staging
-Pull request on staging for test in pre-production and after that pull request on master
+(Test e2e in progress with api user and authentication)
+
+
+## Bonus
 
 ### Naming of new branch:
 
@@ -115,11 +229,8 @@ git checkout hotfix/profile-page-error/621 staging
 ```
 issue_id corresponds to issue id 
 
-We create the new branch from staging branch
-
 3) Source for github branch
 [successful-git-branching-model](https://nvie.com/posts/a-successful-git-branching-model/)
-
 
 ## Commit
 

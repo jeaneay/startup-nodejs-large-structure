@@ -19,7 +19,7 @@ const getCookie = (name: string, value: string, expires: number): Cookie => {
     name,
     value,
     options: {
-      httpOnly: true,
+      httpOnly: false,
       domain:
         process.env.NODE_ENV !== 'production'
           ? 'localhost'
@@ -43,7 +43,7 @@ const getCookieRefreshToken = (
     name: COOKIE_REFRESH_TOKEN_NAME,
     value: refreshToken,
     options: {
-      httpOnly: true,
+      httpOnly: false,
       domain:
         process.env.NODE_ENV !== 'production'
           ? 'localhost'

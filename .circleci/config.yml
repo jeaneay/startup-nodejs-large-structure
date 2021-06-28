@@ -1,0 +1,41 @@
+version: 2.1
+jobs: 
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/node:14.16.0
+        environment:
+          TZ: Europe/Paris
+          TEST_DB_NAME: testDB
+          TEST_DB_PORT: 5432
+          TEST_DB_PASS: testing
+          TEST_DB_USER: testing
+          NODE_ENV: test
+      - image: circleci/postgres:latest
+        environment:
+          POSTGRES_USER: testing
+          POSTGRES_PASSWORD: testing
+          POSTGRES_DB: testDB
+          PGDATA: /var/lib/postgresql/data/pgdata
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: 
+          name: Install packages
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: 
+          name: Wait for Postgres connection to open
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create migrations table and seed
+          command: npm run migrations:all
+      - run:
+          name: Start test
+          command: npm test
