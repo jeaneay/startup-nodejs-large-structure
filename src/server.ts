@@ -1,7 +1,6 @@
 import App from './app';
 import * as http from 'http';
 import { server } from './utils';
-import { socketio } from './config';
 
 class Server extends App {
   private readonly _port: number;
@@ -11,7 +10,6 @@ class Server extends App {
     super();
     this._port = port;
     this._httpServer = http.createServer(this.app);
-    socketio.start(this._httpServer);
   }
 
   public start() {

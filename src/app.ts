@@ -9,7 +9,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { routes } from './modules';
 import { winston } from './config';
-import { notify, server } from './utils';
+import { server } from './utils';
 
 class App {
   public readonly app: express.Application;
@@ -121,7 +121,6 @@ class App {
 
   private _getConfigError(): void {
     if (process.env.NODE_ENV === 'development') {
-      //this.app.use(errorhandler({ log: notify.applyErrorNotification }));
       this.app.use(errorhandler());
     }
   }

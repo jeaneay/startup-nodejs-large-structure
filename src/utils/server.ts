@@ -1,5 +1,4 @@
 import * as http from 'http';
-import { ErrnoException } from 'node/server';
 import { appEnv } from '../config';
 import { logger } from './';
 
@@ -21,7 +20,7 @@ const getNormalizePort = (val: string): string | number | boolean => {
 };
 
 // getErrorHandler : Searches for the various errors and manages them appropriately. It is then stored in the server
-const getErrorHandler = (error: ErrnoException, server: http.Server) => {
+const getErrorHandler = (error: any, server: http.Server) => {
   if (error.syscall !== 'listen') {
     throw error;
   }

@@ -2,7 +2,6 @@ import * as dotenv from 'dotenv';
 import { createLogger, format, transports } from 'winston';
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
-import WinstonCloudWatch from 'winston-cloudwatch';
 
 const { combine, colorize, json, timestamp, simple } = format;
 
@@ -57,14 +56,6 @@ const logDev: winston.Logger = createLogger({
   transports: [
     new transports.Console(options.console),
     options.file_all,
-    // new transports.file(options.file_all)
-    /* new WinstonCloudWatch({
-      logGroupName: 'testing',
-      logStreamName: 'first',
-      awsAccessKeyId: process.env.CLOUDWATCH_ACCESS_KEY,
-      awsSecretKey: process.env.CLOUDWATCH_ACCESS_SECRET,
-      awsRegion: process.env.AWS_ACCESS_REGION
-    }) */
   ],
   exceptionHandlers: [options.file_exception],
   exitOnError: false, // do not exit on handled exceptions

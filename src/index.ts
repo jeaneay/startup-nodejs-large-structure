@@ -5,10 +5,9 @@ import Server from './server';
 
 const workers: any[] = [];
 
-/* if (process.env.NODE_ENV !== "development" && cluster.isMaster) {
+if (process.env.NODE_ENV !== "development" && cluster.isMaster) {
   const numCPUs = cpus().length;
 
-  console.log("Master cluster setting up " + numCPUs + " workers");
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
     workers.push(cluster.fork());
@@ -39,8 +38,8 @@ const workers: any[] = [];
       console.log(message);
     });
   });
-} else { */
-const PORT = Number(appEnv.config.port);
-const server = new Server(PORT);
-server.start();
-/* } */
+} else {
+  const PORT = Number(appEnv.config.port);
+  const server = new Server(PORT);
+  server.start();
+}
