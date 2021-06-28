@@ -88,9 +88,9 @@ The use of sequelize in development is not the same as in production because in 
 
 For this project I use the synchronization for all models, to do this I created 2 files :
 
-A file [load-model](https://github.com/jeaneay/startup-nodejs-large-structure/blob/master/src/config/database.ts) which allows to sync and create associations between models in the database.
+A file [load-model](https://github.com/jeaneay/startup-nodejs-large-structure/blob/master/src/config/load-models.ts) which allows to sync and create associations between models in the database.
 
-And the file [create-model](https://github.com/jeaneay/startup-nodejs-large-structure/blob/master/src/config/database.ts) which is particular because for the synchronization of the models. 
+And the file [create-model](https://github.com/jeaneay/startup-nodejs-large-structure/blob/master/src/utils/create-models.ts) which is particular because for the synchronization of the models. 
 
 Most of the time you will find the load-model file in the same folder where all models are stored but with a component/module structure the models are separated.
 
