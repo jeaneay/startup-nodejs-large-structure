@@ -10,9 +10,9 @@ type Cookie = {
   options: CookieOptions;
 };
 
-const COOKIE_ACCESS_TOKEN_NAME = 'omedema_accesstoken';
-const COOKIE_REFRESH_TOKEN_NAME = 'omedema_refrestoken';
-const COOKIE_XSRF_TOKEN_NAME = 'omedema_xsrftoken';
+const COOKIE_ACCESS_TOKEN_NAME = 'app_accesstoken';
+const COOKIE_REFRESH_TOKEN_NAME = 'app_refrestoken';
+const COOKIE_XSRF_TOKEN_NAME = 'app_xsrftoken';
 
 const getCookie = (name: string, value: string, expires: number): Cookie => {
   const cookie = {
@@ -50,7 +50,6 @@ const getCookieRefreshToken = (
           : process.env.DOMAIN_NAME,
       secure: process.env.NODE_ENV !== 'production' ? false : false,
       maxAge: expires * 1000,
-      path: '/auth/refresh-token' //this cookie will send only on this route
     },
   };
   return cookieRefreshTokenName;

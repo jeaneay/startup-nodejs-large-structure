@@ -44,7 +44,7 @@ describe('UTILS COOKIE', function() {
             const infos = getCookieXsrfToken(cookieValue, cookieExpire);
 
             expect(Object.keys(infos), "lengthOf error").to.have.lengthOf(3)
-            expect(infos, "name error").to.have.deep.property('name', "omedema_xsrftoken");
+            expect(infos, "name error").to.have.deep.property('name', "app_xsrftoken");
             expect(infos, "value error").to.have.deep.property('value', cookieValue);
             expect(infos, "options error").to.have.deep.property('options');
 
@@ -64,16 +64,15 @@ describe('UTILS COOKIE', function() {
             const infos = getCookieRefreshToken(cookieValue, cookieExpire);
 
             expect(Object.keys(infos), "lengthOf error").to.have.lengthOf(3)
-            expect(infos, "name error").to.have.deep.property('name', 'omedema_refrestoken');
+            expect(infos, "name error").to.have.deep.property('name', 'app_refrestoken');
             expect(infos, "value error").to.have.deep.property('value', cookieValue);
             expect(infos, "options error").to.have.deep.property('options');
 
-            expect(Object.keys(infos.options)).to.have.lengthOf(5);
+            expect(Object.keys(infos.options)).to.have.lengthOf(4);
             expect(infos.options, "options httpOnly error").to.have.deep.property('httpOnly', false);
             expect(infos.options, "options domain error").to.have.deep.property('domain', 'localhost');
             expect(infos.options, "options secure error").to.have.deep.property('secure', false);
             expect(infos.options, "options maxAge error").to.have.deep.property('maxAge', 1000000);
-            expect(infos.options, "options path error").to.have.deep.property('path', '/auth/refresh-token');
         });
     });
     
