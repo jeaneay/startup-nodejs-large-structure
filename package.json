@@ -20,7 +20,19 @@
     "port": "8082"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production && npm run migrations:table && ./node_modules/pm2/bin/pm2-runtime dist",
+    "migrations:all": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "migrations:table": "npx sequelize-cli db:migrate",
+    "migrations:seeds": "npx sequelize-cli db:seed:all",
+    "watch": "cross-env concurrently -k -n \"Typescript, Node\" -c \"blue,green\"  \"npm:watch:*\"",
+    "watch:ts": "tsc -w",
+    "watch:node": "cross-env NODE_ENV=development nodemon dist",
+    "build": "cross-env concurrently npm:build:*",
+    "build:clean": "rm -rf dist",
+    "build:ts": "tsc",
+    "prettier:write": "npx prettier --write src/",
+    "prettier:check": "npx prettier --check src/",
+    "test": "tsc && cross-env NODE_ENV=test node_modules/.bin/mocha tests/**/**.test.js --timeout 60000"
   },
   "dependencies": {
     "aws-sdk": "^2.805.0",
@@ -39,6 +51,9 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.4",
+    "pm2": "^5.1.0",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",
     "uuid": "^8.3.2",

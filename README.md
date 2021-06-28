@@ -1,7 +1,66 @@
-# omedema-backend
-Startup NodeJs Large Structure
+### About
+Starting a large nodejs structure with NodeJS, Sequelize, typescript, Express, winston...
 
+## Installing dependencies
 
+To install the dependencies run
+
+```
+npm install
+```
+
+## Running the application locally with local env vars
+
+Before to run app edit create the file `.env` with this configuration
+
+```
+
+# website
+URL_API=http://127.0.0.1:8090
+
+# env
+NODE_ENV=development
+
+# Port
+LOCAL_APP_PORT=8090
+
+#PASSWORD
+SALT_PASSWORD=15
+
+# PostgreSQL
+LOCAL_DB_HOST=localhost
+LOCAL_DB_NAME=localDB
+LOCAL_DB_PORT=5432
+LOCAL_DB_PASS=testing
+LOCAL_DB_USER=testing
+
+# Winston
+FOLDER_ALL_LOG=logs/all/
+FOLDER_EXCEPTIONS_LOG=logs/exceptions/
+FOLDER_ERRORS_LOG=logs/errors/
+FOLDER_HTTP_LOG=logs/http/
+DEV_FILENAME_LOG=combined.log
+DEV_FILENAME_EXCEPTION_LOG=exceptions.log
+PROD_FILENAME_ERROR_LOG=logs/errors/errors.log
+PROD_FILENAME_EXCEPTION_LOG=logs/exceptions/exceptions.log
+PROD_FILENAME_OTHER_LOG=logs/all/combined.log
+PROD_FILENAME_HTTP_LOG=logs/all/http.log
+
+# JWT_TOKEN
+JWT_SECRET=wr3r23fwfwefwekwself.2456342.dawqdq
+JWT_EXPIRESIN=30m
+JWT_REFRESH_SECRET=
+JWT_REFRESH_EXPIRESIN=259200
+JWT_RESET_PASSWORD_SECRET=
+JWT_RESET_PASSWORD_EXPIRESIN=1800
+```
+
+You can run:
+```
+npm run watch
+```
+
+Note that if you change the value of the `.env` file, you need to run `npm run watch` again so that the new env var changes are picked up.
 
 ### Active postgresql database with docker:
 
@@ -23,8 +82,8 @@ if you want to active your docker database with pgAdmin when you need to connect
 Host name/address : 127.0.0.1
 Port : 5432
 Maintenance database : postgres
-Username: omedema
-Password: omedema
+Username: testing
+Password: testing
 ```
 
 ## Branch

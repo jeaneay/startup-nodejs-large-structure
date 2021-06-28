@@ -10,13 +10,5 @@ const eraseTable = false;
 // Create models
 const db: DbInterface = loadModels(eraseTable);
 
-if (process.env.NODE_ENV === 'development') {
-  //Create fake datas
-  if (eraseTable) {
-    setTimeout(() => {
-      //createSeed()
-    }, 4000);
-  }
-}
 
 export { routes, db };

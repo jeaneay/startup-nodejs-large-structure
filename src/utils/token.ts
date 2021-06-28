@@ -42,10 +42,9 @@ const createToken = async (
 ): Promise<CreateToken> => {
   try {
     const xsrfToken = await createXsrfToken();
-    //const { id, email, roleId, roleCompanyId, companyId } = user;
-    const { id, email, companyId } = user;
+    const { id, email } = user;
     const accessToken = await jwt.sign(
-      { id, email, companyId, xsrfToken },
+      { id, email, xsrfToken },
       appEnv.JWT_SECRET,
       { expiresIn: expires },
     );
@@ -126,12 +125,12 @@ const getPasswordToken = async (token: string): Promise<string> => {
 };
 
 export {
-  getHeadersToken,
   createXsrfToken,
   createToken,
-  getInfosToAccessToken,
   createRefreshToken,
-  getRefreshToken,
   createPasswordToken,
+  getHeadersToken,
+  getInfosToAccessToken,
+  getRefreshToken,
   getPasswordToken,
 };
