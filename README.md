@@ -18,15 +18,15 @@ You will also find a sample api for signup, signin (with cookie and access token
 
 * [Structure](#structure)
 * [Installing dependencies](#installing-dependencies)
-* [Docker and postgresql](#Docker-and-postgresql)
+* [Docker and Postgresql](#Docker-and-Postgresql)
 * [Sequelize](#sequelize)
   * [Development](#development)
   * [Production](#production)
 * [Running the application](#Running-the-application)
-* [CI/CD](#CI-CD)
+* [CI/CD](#CI/CD)
   * [Circle CI](#circle-ci)
-  * [Github Action and AWS](#github-action-aws)
-* [Testing](#CI-CD)
+  * [Github Action and AWS](#Github-Action-and-AWS)
+* [Testing](#Testing)
 * [Bonus](#bonus)
 
 ## Structure
@@ -51,7 +51,7 @@ To install the dependencies run
 npm install
 ```
 
-### Docker and postgresql
+## Docker and Postgresql
 
 I use docker locally to create the database in postgresql with the file Dockerfile
 You need to install docker in your computer after that you can build and run your image with the file Dockerfile.
