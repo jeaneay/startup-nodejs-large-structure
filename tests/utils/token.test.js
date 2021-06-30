@@ -38,23 +38,6 @@ describe('UTILS TOKEN', function() {
             }
         });
 
-        it('#Should be valid if the user at 3 properties (id, email) #success.', async function(){
-            try {
-                const user = {
-                    id: 1,
-                    email: 'test@test.com',
-                };
-                const datas = await token.createToken(user);
-                //Check token informations
-                expect(datas).to.exist;
-                expect(Object.keys(datas)).to.have.lengthOf(2);
-                expect(datas, '"xsrfToken" information is not wrong.').to.have.deep.property("xsrfToken", datas.xsrfToken);
-                expect(datas, '"accessToken" information is not wrong.').to.have.deep.property("accessToken", datas.accessToken);
-            } catch (error) {
-                expect(error).to.not.throw();
-            }
-        });
-
         it('#Should be invalid if the user required properties (id, email) are empty #error.', async function(){
             try {
                 (await token.createToken()).should.be.rejected;
