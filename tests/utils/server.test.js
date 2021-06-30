@@ -21,7 +21,7 @@ describe('UTILS SERVER', function() {
 
         it('#Should be invalid if the param at value NaN #error', async function(){
             try {
-                const port = await server.getNormalizePort(0 / 0);
+                const port = await server.getNormalizePort(NaN);
                 expect(port).to.exist;
             } catch (error) {
                 expect(error).to.not.throw();

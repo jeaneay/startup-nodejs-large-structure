@@ -92,8 +92,8 @@ describe('UTILS TOKEN', function() {
 
         it('#Should be invalid if we send bad token #error.', async function(){
             try {
-                const token = "token";
-                (await token.getInfosToAccessToken(token)).should.be.rejected;
+                const tokenName = "token";
+                (await token.getInfosToAccessToken(tokenName)).should.be.rejected;
             } catch (error) {
                 expect(error).to.exist;
             }
@@ -219,8 +219,8 @@ describe('UTILS TOKEN', function() {
 
         it('#Should be invalid if we send bad token #error.', async function(){
             try {
-                const token = "token";
-                (await token.getPasswordToken(token)).should.be.rejected;
+                const tokenName = "token";
+                (await token.getPasswordToken(tokenName)).should.be.rejected;
             } catch (error) {
                 expect(error).to.exist;
             }
