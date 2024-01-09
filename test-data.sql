@@ -20,7 +20,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: bookings; Type: TABLE; Schema: public; Owner: staycation
+-- Name: bookings; Type: TABLE; Schema: public; Owner: backend
 --
 
 CREATE TABLE public.bookings (
@@ -31,10 +31,10 @@ CREATE TABLE public.bookings (
 );
 
 
-ALTER TABLE public.bookings OWNER TO staycation;
+ALTER TABLE public.bookings OWNER TO backend;
 
 --
--- Name: bookings_id_seq; Type: SEQUENCE; Schema: public; Owner: staycation
+-- Name: bookings_id_seq; Type: SEQUENCE; Schema: public; Owner: backend
 --
 
 CREATE SEQUENCE public.bookings_id_seq
@@ -46,17 +46,17 @@ CREATE SEQUENCE public.bookings_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.bookings_id_seq OWNER TO staycation;
+ALTER TABLE public.bookings_id_seq OWNER TO backend;
 
 --
--- Name: bookings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: staycation
+-- Name: bookings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: backend
 --
 
 ALTER SEQUENCE public.bookings_id_seq OWNED BY public.bookings.id;
 
 
 --
--- Name: hotels; Type: TABLE; Schema: public; Owner: staycation
+-- Name: hotels; Type: TABLE; Schema: public; Owner: backend
 --
 
 CREATE TABLE public.hotels (
@@ -68,10 +68,10 @@ CREATE TABLE public.hotels (
 );
 
 
-ALTER TABLE public.hotels OWNER TO staycation;
+ALTER TABLE public.hotels OWNER TO backend;
 
 --
--- Name: openings; Type: TABLE; Schema: public; Owner: staycation
+-- Name: openings; Type: TABLE; Schema: public; Owner: backend
 --
 
 CREATE TABLE public.openings (
@@ -85,10 +85,10 @@ CREATE TABLE public.openings (
 );
 
 
-ALTER TABLE public.openings OWNER TO staycation;
+ALTER TABLE public.openings OWNER TO backend;
 
 --
--- Name: reviews; Type: TABLE; Schema: public; Owner: staycation
+-- Name: reviews; Type: TABLE; Schema: public; Owner: backend
 --
 
 CREATE TABLE public.reviews (
@@ -99,10 +99,10 @@ CREATE TABLE public.reviews (
 );
 
 
-ALTER TABLE public.reviews OWNER TO staycation;
+ALTER TABLE public.reviews OWNER TO backend;
 
 --
--- Name: reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: staycation
+-- Name: reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: backend
 --
 
 CREATE SEQUENCE public.reviews_id_seq
@@ -114,17 +114,17 @@ CREATE SEQUENCE public.reviews_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.reviews_id_seq OWNER TO staycation;
+ALTER TABLE public.reviews_id_seq OWNER TO backend;
 
 --
--- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: staycation
+-- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: backend
 --
 
 ALTER SEQUENCE public.reviews_id_seq OWNED BY public.reviews.id;
 
 
 --
--- Name: rooms; Type: TABLE; Schema: public; Owner: staycation
+-- Name: rooms; Type: TABLE; Schema: public; Owner: backend
 --
 
 CREATE TABLE public.rooms (
@@ -134,10 +134,10 @@ CREATE TABLE public.rooms (
 );
 
 
-ALTER TABLE public.rooms OWNER TO staycation;
+ALTER TABLE public.rooms OWNER TO backend;
 
 --
--- Name: sale_dates; Type: TABLE; Schema: public; Owner: staycation
+-- Name: sale_dates; Type: TABLE; Schema: public; Owner: backend
 --
 
 CREATE TABLE public.sale_dates (
@@ -148,10 +148,10 @@ CREATE TABLE public.sale_dates (
 );
 
 
-ALTER TABLE public.sale_dates OWNER TO staycation;
+ALTER TABLE public.sale_dates OWNER TO backend;
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: staycation
+-- Name: users; Type: TABLE; Schema: public; Owner: backend
 --
 
 CREATE TABLE public.users (
@@ -160,10 +160,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO staycation;
+ALTER TABLE public.users OWNER TO backend;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: staycation
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: backend
 --
 
 CREATE SEQUENCE public.users_id_seq
@@ -175,38 +175,38 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_id_seq OWNER TO staycation;
+ALTER TABLE public.users_id_seq OWNER TO backend;
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: staycation
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: backend
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: bookings id; Type: DEFAULT; Schema: public; Owner: staycation
+-- Name: bookings id; Type: DEFAULT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.bookings ALTER COLUMN id SET DEFAULT nextval('public.bookings_id_seq'::regclass);
 
 
 --
--- Name: reviews id; Type: DEFAULT; Schema: public; Owner: staycation
+-- Name: reviews id; Type: DEFAULT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.reviews ALTER COLUMN id SET DEFAULT nextval('public.reviews_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: staycation
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Data for Name: bookings; Type: TABLE DATA; Schema: public; Owner: staycation
+-- Data for Name: bookings; Type: TABLE DATA; Schema: public; Owner: backend
 --
 
 COPY public.bookings (id, date, user_id, room_id) FROM stdin;
@@ -584,45 +584,45 @@ COPY public.bookings (id, date, user_id, room_id) FROM stdin;
 
 
 --
--- Data for Name: hotels; Type: TABLE DATA; Schema: public; Owner: staycation
+-- Data for Name: hotels; Type: TABLE DATA; Schema: public; Owner: backend
 --
 
 COPY public.hotels (id, name, stars, preview, picture_id) FROM stdin;
-28	Eiffel Blomet	4	Accès piscine + hammam + sauna + petit dej inclus 	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/cb4c7f5b7157408a33fcd1ac946f0d4a.jpg
-21	Pavillon de la Reine	5	Accès jacuzzi + hammam + bt. de vin + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/c7b3bb8998d06406ec60da8a0273b511.jpg
-30	Penthouse du Chat Noir	4	Possibilité 10 amis à dîner + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/13a236d4aac77fe808289c6427557c73.jpg
-15	La Villa Haussmann	4	Accès piscine + hammam + champagne + tapas + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/a750dba1b81638545111c59485e3d091.jpg
-1	Hôtel La Lanterne	4	Accès piscine + hammam + vin + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/3c3811c53bccb69bba40424e79c013ca.jpg
-25	Hôtel de Nell	5	Cérémonial de bain + coupes de champagne + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/7894c67af5374f29b2a5f98e376b9a7a.jpg
-2	Molitor	5	Accès piscines + hammam + fitness + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/aca3d864cc3d90b591287ad36e1d4f72.jpg
-10	Hôtel Thoumieux	4	Dîner brasserie + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/5f0c8e189b6a33be3425c44bc48d27ec.jpg
-11	L'Echiquier	4	Atelier mixologie + cocktails + tea time + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/ff4e6c89caba374c1dc376f7f5c4e95a.jpg
-6	OFF Paris Seine	4	Accès bassin + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/51230d577d49726a4324ccd920f32b80.jpg
-16	Parister	5	Accès piscine + hammam + planche mixte & vin + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/0def9a6adb20dd3c17cf9fbf3c6c9f52.jpg
-22	Vice Versa Hôtel	4	Accès hammam privatif + 1/2 bt. champagne + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/5840e6d02646f9bfca374a728c0b3f80.jpg
-29	Hôtel Saint Marc	4	Accès piscine privative + hammam + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/da50d138716409f296035ff189141ef1.jpg
-14	COQ Hôtel	4	Fantastique dîner raclette + vin + Mario Kart + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/78f3c63c75ae9a756008248a436d5706.jpg
-4	Terrass Hotel	4	Accès rooftop & terrasse + sauna & hammam privatifs + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/4d56a8c573dd7f614617f9fd55f2b890.jpg
-8	Boutet Bastille	5	Accès piscine + sauna-hammam + chocolat chaud + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/868806c118b6c353560063c6c063b8b0.jpg
-17	Da Vinci	4	Accès piscine privative + bt. de Prosecco inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/435ddbf186a1085304b7af9b99ff26b1.jpg
-27	Pool Suite du 1K	4	Petit dej + piscine privée + champagne inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/0be16e7d457d776b0c570cb7a3f2865e.jpg
-12	Hôtel Le Saint 	4	Accès hammam + vélos + champagne + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/374beacdc1ebffa4403480f2ce972a2e.jpg
-19	Maison Albar Le Pont-Neuf	5	Accès piscine + jacuzzi + hammam + champagne + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/db9cb38098fbb4e6438cd0112c2606f1.jpg
-9	Hôtel Grands Boulevards	4	Cicchetti + cocktail ou vino + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/0afccf64e98be6f95f4c60146348a21f.png
-7	Bourgogne & Montana	4	Massage duo + privatisation sauna + tea time + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/0be2d9498225b64c544b6e86245a9ccb.jpg
-3	Hôtel Paradis	3	Produits Bonne Nouvelle + petit dej bio inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/6150989d521ee4bc9bca264f95ddc711.jpeg
-20	LAZ' Hotel Spa Urbain	4	Accès piscine + sauna + hammam + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/430a91e17137913fdeb012830386ef86.jpg
-24	Château d'Augerville Golf & Spa	5	Accès piscine + jacuzzi + sauna + hammam + champagne + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/5cc7416ce9da94c297ea906b65546953.jpg
-23	Le Dokhan's	5	Atelier dégustation champagne + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/1a7517f0e1de3ff06e17337c670e9812.jpg
-26	Hôtel 1K	4	Tapas + cocktails + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/374041cc8ef648d5b5dce874c08d36b7.jpg
-18	Platine Hotel	4	Accès sauna & hammam + 1/2 bt. champagne + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/917230884a30668784bde487149c58db.jpg
-13	Hôtel Panache	4	Produits Bonne Nouvelle + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/1719a617fa946f339d8b38ebb52f25fe.jpg
-5	Square Louvois	4	Accès piscine + tea time + petit dej inclus	https://staycation.twic.pics/v1/cover=1000x-/image:pictures/production/24e1b436b2c8c957b5aca55c4225e425.jpg
+28	Eiffel Blomet	4	Accès piscine + hammam + sauna + petit dej inclus 	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/cb4c7f5b7157408a33fcd1ac946f0d4a.jpg
+21	Pavillon de la Reine	5	Accès jacuzzi + hammam + bt. de vin + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/c7b3bb8998d06406ec60da8a0273b511.jpg
+30	Penthouse du Chat Noir	4	Possibilité 10 amis à dîner + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/13a236d4aac77fe808289c6427557c73.jpg
+15	La Villa Haussmann	4	Accès piscine + hammam + champagne + tapas + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/a750dba1b81638545111c59485e3d091.jpg
+1	Hôtel La Lanterne	4	Accès piscine + hammam + vin + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/3c3811c53bccb69bba40424e79c013ca.jpg
+25	Hôtel de Nell	5	Cérémonial de bain + coupes de champagne + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/7894c67af5374f29b2a5f98e376b9a7a.jpg
+2	Molitor	5	Accès piscines + hammam + fitness + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/aca3d864cc3d90b591287ad36e1d4f72.jpg
+10	Hôtel Thoumieux	4	Dîner brasserie + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/5f0c8e189b6a33be3425c44bc48d27ec.jpg
+11	L'Echiquier	4	Atelier mixologie + cocktails + tea time + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/ff4e6c89caba374c1dc376f7f5c4e95a.jpg
+6	OFF Paris Seine	4	Accès bassin + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/51230d577d49726a4324ccd920f32b80.jpg
+16	Parister	5	Accès piscine + hammam + planche mixte & vin + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/0def9a6adb20dd3c17cf9fbf3c6c9f52.jpg
+22	Vice Versa Hôtel	4	Accès hammam privatif + 1/2 bt. champagne + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/5840e6d02646f9bfca374a728c0b3f80.jpg
+29	Hôtel Saint Marc	4	Accès piscine privative + hammam + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/da50d138716409f296035ff189141ef1.jpg
+14	COQ Hôtel	4	Fantastique dîner raclette + vin + Mario Kart + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/78f3c63c75ae9a756008248a436d5706.jpg
+4	Terrass Hotel	4	Accès rooftop & terrasse + sauna & hammam privatifs + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/4d56a8c573dd7f614617f9fd55f2b890.jpg
+8	Boutet Bastille	5	Accès piscine + sauna-hammam + chocolat chaud + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/868806c118b6c353560063c6c063b8b0.jpg
+17	Da Vinci	4	Accès piscine privative + bt. de Prosecco inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/435ddbf186a1085304b7af9b99ff26b1.jpg
+27	Pool Suite du 1K	4	Petit dej + piscine privée + champagne inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/0be16e7d457d776b0c570cb7a3f2865e.jpg
+12	Hôtel Le Saint 	4	Accès hammam + vélos + champagne + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/374beacdc1ebffa4403480f2ce972a2e.jpg
+19	Maison Albar Le Pont-Neuf	5	Accès piscine + jacuzzi + hammam + champagne + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/db9cb38098fbb4e6438cd0112c2606f1.jpg
+9	Hôtel Grands Boulevards	4	Cicchetti + cocktail ou vino + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/0afccf64e98be6f95f4c60146348a21f.png
+7	Bourgogne & Montana	4	Massage duo + privatisation sauna + tea time + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/0be2d9498225b64c544b6e86245a9ccb.jpg
+3	Hôtel Paradis	3	Produits Bonne Nouvelle + petit dej bio inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/6150989d521ee4bc9bca264f95ddc711.jpeg
+20	LAZ' Hotel Spa Urbain	4	Accès piscine + sauna + hammam + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/430a91e17137913fdeb012830386ef86.jpg
+24	Château d'Augerville Golf & Spa	5	Accès piscine + jacuzzi + sauna + hammam + champagne + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/5cc7416ce9da94c297ea906b65546953.jpg
+23	Le Dokhan's	5	Atelier dégustation champagne + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/1a7517f0e1de3ff06e17337c670e9812.jpg
+26	Hôtel 1K	4	Tapas + cocktails + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/374041cc8ef648d5b5dce874c08d36b7.jpg
+18	Platine Hotel	4	Accès sauna & hammam + 1/2 bt. champagne + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/917230884a30668784bde487149c58db.jpg
+13	Hôtel Panache	4	Produits Bonne Nouvelle + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/1719a617fa946f339d8b38ebb52f25fe.jpg
+5	Square Louvois	4	Accès piscine + tea time + petit dej inclus	https://backend.twic.pics/v1/cover=1000x-/image:pictures/production/24e1b436b2c8c957b5aca55c4225e425.jpg
 \.
 
 
 --
--- Data for Name: openings; Type: TABLE DATA; Schema: public; Owner: staycation
+-- Data for Name: openings; Type: TABLE DATA; Schema: public; Owner: backend
 --
 
 COPY public.openings (id, sale_id, room_id, date, stock, price, discount_price) FROM stdin;
@@ -2135,7 +2135,7 @@ COPY public.openings (id, sale_id, room_id, date, stock, price, discount_price) 
 
 
 --
--- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: staycation
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: backend
 --
 
 COPY public.reviews (id, hotel_id, user_id, score) FROM stdin;
@@ -2652,7 +2652,7 @@ COPY public.reviews (id, hotel_id, user_id, score) FROM stdin;
 
 
 --
--- Data for Name: rooms; Type: TABLE DATA; Schema: public; Owner: staycation
+-- Data for Name: rooms; Type: TABLE DATA; Schema: public; Owner: backend
 --
 
 COPY public.rooms (id, name, hotel_id) FROM stdin;
@@ -2785,7 +2785,7 @@ COPY public.rooms (id, name, hotel_id) FROM stdin;
 
 
 --
--- Data for Name: sale_dates; Type: TABLE DATA; Schema: public; Owner: staycation
+-- Data for Name: sale_dates; Type: TABLE DATA; Schema: public; Owner: backend
 --
 
 COPY public.sale_dates (id, start_date, end_date, bookable_days) FROM stdin;
@@ -2805,7 +2805,7 @@ COPY public.sale_dates (id, start_date, end_date, bookable_days) FROM stdin;
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: staycation
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: backend
 --
 
 COPY public.users (id, first_name) FROM stdin;
@@ -2831,28 +2831,28 @@ COPY public.users (id, first_name) FROM stdin;
 
 
 --
--- Name: bookings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: staycation
+-- Name: bookings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: backend
 --
 
 SELECT pg_catalog.setval('public.bookings_id_seq', 1222, true);
 
 
 --
--- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: staycation
+-- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: backend
 --
 
 SELECT pg_catalog.setval('public.reviews_id_seq', 605, true);
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: staycation
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: backend
 --
 
 SELECT pg_catalog.setval('public.users_id_seq', 18, true);
 
 
 --
--- Name: bookings bookings_pk; Type: CONSTRAINT; Schema: public; Owner: staycation
+-- Name: bookings bookings_pk; Type: CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.bookings
@@ -2860,7 +2860,7 @@ ALTER TABLE ONLY public.bookings
 
 
 --
--- Name: hotels hotels_pk; Type: CONSTRAINT; Schema: public; Owner: staycation
+-- Name: hotels hotels_pk; Type: CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.hotels
@@ -2868,7 +2868,7 @@ ALTER TABLE ONLY public.hotels
 
 
 --
--- Name: openings openings_pk; Type: CONSTRAINT; Schema: public; Owner: staycation
+-- Name: openings openings_pk; Type: CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.openings
@@ -2876,7 +2876,7 @@ ALTER TABLE ONLY public.openings
 
 
 --
--- Name: reviews reviews_pk; Type: CONSTRAINT; Schema: public; Owner: staycation
+-- Name: reviews reviews_pk; Type: CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.reviews
@@ -2884,7 +2884,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: rooms rooms_pkey; Type: CONSTRAINT; Schema: public; Owner: staycation
+-- Name: rooms rooms_pkey; Type: CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.rooms
@@ -2892,7 +2892,7 @@ ALTER TABLE ONLY public.rooms
 
 
 --
--- Name: sale_dates sale_dates_pk; Type: CONSTRAINT; Schema: public; Owner: staycation
+-- Name: sale_dates sale_dates_pk; Type: CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.sale_dates
@@ -2900,7 +2900,7 @@ ALTER TABLE ONLY public.sale_dates
 
 
 --
--- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: staycation
+-- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.users
@@ -2908,14 +2908,14 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: bookings_date_index; Type: INDEX; Schema: public; Owner: staycation
+-- Name: bookings_date_index; Type: INDEX; Schema: public; Owner: backend
 --
 
 CREATE INDEX bookings_date_index ON public.bookings USING btree (date);
 
 
 --
--- Name: bookings bookings_room_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: staycation
+-- Name: bookings bookings_room_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.bookings
@@ -2923,7 +2923,7 @@ ALTER TABLE ONLY public.bookings
 
 
 --
--- Name: bookings bookings_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: staycation
+-- Name: bookings bookings_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.bookings
@@ -2931,7 +2931,7 @@ ALTER TABLE ONLY public.bookings
 
 
 --
--- Name: openings openings_room_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: staycation
+-- Name: openings openings_room_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.openings
@@ -2939,7 +2939,7 @@ ALTER TABLE ONLY public.openings
 
 
 --
--- Name: openings openings_sale_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: staycation
+-- Name: openings openings_sale_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.openings
@@ -2947,7 +2947,7 @@ ALTER TABLE ONLY public.openings
 
 
 --
--- Name: reviews reviews_hotel_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: staycation
+-- Name: reviews reviews_hotel_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.reviews
@@ -2955,7 +2955,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: reviews reviews_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: staycation
+-- Name: reviews reviews_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.reviews
@@ -2963,7 +2963,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: rooms rooms_hotel_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: staycation
+-- Name: rooms rooms_hotel_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: backend
 --
 
 ALTER TABLE ONLY public.rooms
