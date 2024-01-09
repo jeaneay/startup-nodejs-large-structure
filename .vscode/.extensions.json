@@ -1,0 +1,25 @@
+  
+{
+    // See http://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+    // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+  
+    // List of extensions which should be recommended for users of this workspace.
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "editorconfig.editorconfig",
+      "esbenp.prettier-vscode",
+      "eamodio.gitlens", // For git
+      "rbbit.typescript-hero", // Help vscode to organize your imports with typescript
+      "christian-kohler.path-intellisense", //autocompletes filenames.
+      "msjsdiag.debugger-for-chrome", //debugger with chrome.
+      "CoenraadS.bracket-pair-colorizer", //Allows matching brackets to be identified with colours
+      "xabikos.JavaScriptSnippets", //Code snippets for JavaScript in ES6 syntax
+      "dsznajder.es7-react-js-snippets", //Code snippets for React/Redux/React-Native snippets in ES7 with Babel plugin
+      "johnpapa.vscode-peacock", //change the color of your Visual Studio Code workspace. Ideal when you have multiple workspace
+      "aaron-bond.better-comments", //help you create more human-friendly comments in your code
+      "humao.rest-client", //REST Client allows you to send HTTP request and view the response in Visual Studio Code directly.
+      "Stalinbalraj.timestamp-converter", //Convert epoch to human-readable date.
+      "firsttris.vscode-jest-runner", //Test unit with jest.
+      "wallabyjs.console-ninja", //Display the console directly in the code
+    ]
+  }

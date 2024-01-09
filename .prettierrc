@@ -1,6 +1,11 @@
 {
-    "semi": true,
+    "arrowParens": "avoid",
+    "jsxSingleQuote": true,
+    "semi": false,
     "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
-}
+    "trailingComma": "none",
+    "plugins": [
+      "prettier-plugin-organize-imports",
+      "prettier-plugin-prisma"
+    ]
+  }

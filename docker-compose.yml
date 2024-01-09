@@ -1,0 +1,16 @@
+version: "2.1"
+
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: database-postgres
+    environment:
+      - POSTGRES_DB=backend
+      - POSTGRES_USER=backend
+      - POSTGRES_PASSWORD=password
+      - TZ=GMT
+    ports:
+      - 5432:5432
+    volumes:
+      - ./test-data.sql:/docker-entrypoint-initdb.d/init.sql

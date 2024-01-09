@@ -1,13 +1,9 @@
-import * as appEnv from './environment';
+import * as appEnv from './environment.config';
 import winston from './winston';
-import * as database from './database';
-import * as awsConfig from './aws';
-import loadModels from './load-models';
+import * as awsConfig from './aws.config';
 
 export {
   appEnv,
   winston,
-  database,
   awsConfig,
-  loadModels,
 };

@@ -1,129 +1,87 @@
-import path from 'path';
-import compression from 'compression';
-import cors from 'cors';
-import errorhandler from 'errorhandler';
-import express from 'express';
-import helmet from 'helmet';
-import methodOverride from 'method-override';
-import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
-import { routes } from './modules';
-import { winston } from './config';
-import { server } from './utils';
+import compression from 'compression'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import express from 'express'
+import helmet from 'helmet'
+import methodOverride from 'method-override'
+import morgan from 'morgan'
+import path from 'path'
+import { LoggerStream } from './config/winston.logger'
+import { server } from './helpers'
+import { NotFoundError } from './helpers/errors'
+import { getHeaders, setCache } from './helpers/server.helpers'
+import { ErrorHandlingMiddleware } from './middlewares/errorHandler.middleware'
+import { generalRateLimiter } from './middlewares/rateLimit.middleware'
+import { hotelRoutes } from './routes'
 
 class App {
-  public readonly app: express.Application;
+  public readonly app: express.Application
 
   public constructor() {
-    this.app = express();
-    this._getConfig();
-    this._getConfigAssets();
-    this._getRoutes();
-    this._getConfigError();
+    this.app = express()
+    this._getConfig()
+    this._getConfigAssets()
+    this._getRoutes()
+    this._getConfigError()
   }
 
   private _getConfig(): void {
     // mount compress all response
-    this.app.use(compression());
+    this.app.use(compression())
     // mount json from parser
-    this.app.use(express.json({ limit: '50mb' }));
+    this.app.use(express.json({ limit: '50mb' }))
     // mount query string parser
-    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.urlencoded({ extended: true }))
     // mount methodOverride for override http request with Put and Delete
-    this.app.use(methodOverride());
-    this.app.use(
-      (
-        _: express.Request,
-        res: express.Response,
-        next: express.NextFunction,
-      ): void => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header(
-          'Access-Control-Allow-Headers',
-          'X-Requested-With, Content-Type, Authorization, origin',
-        );
-        res.header(
-          'Access-Control-Allow-Methods',
-          'GET,PUT,PATCH,POST,DELETE,OPTIONS',
-        );
-        next();
-      },
-    );
+    this.app.use(methodOverride())
+    // get Headers
+    this.app.use(getHeaders)
     // Cookie
-    this.app.use(cookieParser());
+    this.app.use(cookieParser())
     // morgan : HTTP request logger
-    this.app.use(morgan('combined', { stream: new winston.LoggerStream() }));
-    // Managa the static files
-    this.app.use('/public', express.static(path.join(__dirname, '../public')));
+    this.app.use(morgan('combined', { stream: new LoggerStream() }))
+    // Manage the static files
+    this.app.use('/public', express.static(path.join(__dirname, '../public')))
     // mount cors
     this.app.use(
       cors({
         origin: server.getCorsOptions,
-        credentials: true,
-      }),
-    );
+        credentials: true
+      })
+    )
     // mount helmet for secure HTTP headers
-    this.app.use(helmet());
+    this.app.use(helmet())
+    // manage cache
+    this.app.use(setCache)
+    // rate Limit
+    // Apply the rate limiting middleware to all requests.
+    // I have to put this middleware before the all route
+    this.app.use(generalRateLimiter)
   }
 
   private _getRoutes(): void {
     //For elasticbeanstalk health
-    this.app.get('/', function (req, resp) {
-      resp.writeHead(200, 'Content-type: text/html');
-      resp.end();
-    });
+    this.app.get('/', function (req, res) {
+      res.writeHead(200, 'Content-type: text/html')
+      res.end()
+    })
 
-    this.app.get('/favicon.ico', (req, res) => res.status(204));
+    this.app.use('/api/v1', hotelRoutes)
 
-    this.app.use('/api', routes);
-
-    //All routes that are not matched by our API are redirect
-    this.app.get(
-      '*',
-      (
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction,
-      ) => {
-        const err = {
-          error: new Error(`${req.ip} tried to access ${req.originalUrl}`),
-          _statusCode: 301,
-        };
-        next(err);
-      },
-    );
-
-    this.app.use(
-      (
-        err: any,
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction,
-      ) => {
-        //For most errors that don't deal with errors
-        if (!err._statusCode) err._statusCode = 500;
-        if (err._statusCode === 301) {
-          return res.status(301).redirect('/');
-        }
-        //When is a message from a sequelize bulk the error it's not the same
-        let message: string;
-        message = err.toString() !== 'Error' ? err.toString() : err._data;
-        //Manage error from multer upload
-        message = err.field ? err.field : message;
-        return res.status(err._statusCode).json({ error: message });
-      },
-    );
+    //404 errors for routes not found
+    this.app.use((req, res, next) => {
+      const err = new NotFoundError('Route not found')
+      next(err)
+    })
   }
 
   private _getConfigAssets(): void {
-    this.app.use(express.static('public'));
+    this.app.use(express.static('public'))
   }
 
   private _getConfigError(): void {
-    if (process.env.NODE_ENV === 'development') {
-      this.app.use(errorhandler());
-    }
+    this.app.use(ErrorHandlingMiddleware.handleErrors)
   }
 }
 
-export default App;
+export default App

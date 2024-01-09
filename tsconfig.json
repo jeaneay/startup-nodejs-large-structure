@@ -3,7 +3,7 @@
     "extends": "@tsconfig/node12/tsconfig.json",    
     "compilerOptions": {
       "baseUrl": ".",
-      "outDir": "dist",
+      "outDir": "./dist",
       "target": "esnext",
       "strict": true,
       "module": "CommonJS",
@@ -16,15 +16,12 @@
       "removeComments": true,
       "allowSyntheticDefaultImports": true,
       "paths": {
-          "*": [
-              "node_modules/*",
-              "src/types/*"
-          ]
+        "@/*": ["./src/*"]
       },
       "lib": [
           "esnext"
       ]
     },
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules", "coverage", "dist", "seeds"]
 }
